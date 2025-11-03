@@ -15,7 +15,9 @@ from agents import (
     input_guardrail,
 )
 from agents.extensions.handoff_prompt import RECOMMENDED_PROMPT_PREFIX
+from dotenv import load_dotenv
 
+load_dotenv()
 # =========================
 # CONTEXT
 # =========================
@@ -298,7 +300,8 @@ triage_agent = Agent[AirlineAgentContext](
     handoff_description="A triage agent that can delegate a customer's request to the appropriate agent.",
     instructions=(
         f"{RECOMMENDED_PROMPT_PREFIX} "
-        "You are a helpful triaging agent. You can use your tools to delegate questions to other appropriate agents."
+        "You are a helpful triaging agent. You can use your tools to delegate questions to other appropriate agents. Only pass to the FAQ Agent if not realted to" \
+        "flight status, cancellation, or seat booking."
     ),
     handoffs=[
         flight_status_agent,
